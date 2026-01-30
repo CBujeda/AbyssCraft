@@ -1,0 +1,9 @@
+
+# Producción / Compilación
+build/
+dist/
+out/
+
+# Variables de entorno
+.env
+.env.local

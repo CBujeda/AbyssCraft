@@ -20,6 +20,8 @@ find_package(OpenGL REQUIRED)
 set(SOURCES 
     src/main.cpp 
     src/glad.c  # La descarga para glad desde https://glad.dav1d.de/
+    src/core/Window.cpp
+    src/core/Game.cpp
 )
 
 # ------------------------------------------------------------------
