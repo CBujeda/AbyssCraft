@@ -4,12 +4,14 @@
 namespace AbyssCore {
     Game::Game() : m_isRunning(true){
         m_window = std::make_unique<Window>(800,600,"AbyssCraft");
+        m_shader = std::make_unique<Shader>("assets/shaders/core.vert", "assets/shaders/core.frag");
     }
 
     Game::~Game(){
         m_isRunning = false;
         if(m_logicThread.joinable()){
             m_logicThread.join(); // Esperamos a que el hilo de logica termine antes de cerrar, para no dejar hijos en el SO
+            std::cout << "[System] Logic thread joined safely." << std::endl;
         }
     }
 
@@ -19,14 +21,41 @@ namespace AbyssCore {
     }
 
     void Game::renderLoop(){
+        std::cout << "[System] Render Thread Started" << std::endl;
+        Tessellator& tessellator = Tessellator::getInstance();
         while(m_isRunning && !m_window->shouldClose()){
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             // Leemos el estado del mundo-> Metido en un mutex
+
+            m_shader->use();
+            float currentX = 0;
             {
                 std::lock_guard<std::mutex> lock(m_stateMutex);
+                currentX = m_triangleX;
                 // renderWorld();
             }
+            // ------------ TEST DIBUJO TRIANGULO
+            // 4. Dibujar usando Tessellator
+            tessellator.startDrawing();
+            
+            tessellator.setColor(0.0f, 1.0f, 0.5f, 1.0f); // Verde Cyan
+
+            // Dibujamos un triángulo usando la posición calculada por el otro hilo
+            // Vértice 1 (Arriba)
+            tessellator.addVertex(currentX, 0.5f, 0.0f);
+            
+            // Vértice 2 (Abajo Derecha)
+            tessellator.setColor(1.0f, 0.0f, 0.5f, 1.0f); // Gradiente
+            tessellator.addVertex(currentX + 0.5f, -0.5f, 0.0f);
+            
+            // Vértice 3 (Abajo Izquierda)
+            tessellator.setColor(0.0f, 0.5f, 1.0f, 1.0f); // Gradiente
+            tessellator.addVertex(currentX - 0.5f, -0.5f, 0.0f);
+
+            tessellator.draw();
+            // ------------- FIN TEST
+
             m_window->swapBuffers();
             m_window->pollEvents();
         }
@@ -46,12 +75,18 @@ namespace AbyssCore {
 
             if (delta >= nsPerTick) {
                 // Logica x Tick
+                // --- Inicio Sección Critica
                 {
                     std::lock_guard<std::mutex> lock(m_stateMutex);
+                    m_triangleX += m_triangleSpeed;
+                    if(m_triangleX >0.8f || m_triangleX < -0.8f){
+                        m_triangleSpeed *= -1.0f; // Rebote
+                    }
                     // world->tick();
                     // player->tick();
                     // physics->update();
                 }
+                // --- Fin sección critica
                 delta -= nsPerTick;
 
             } else {

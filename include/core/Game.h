@@ -6,6 +6,9 @@
 #include <atomic>
 #include <mutex>
 #include "Window.h"
+#include "render/Shader.h"
+#include "render/Tessellator.h"
+#include <iostream>
 
 namespace AbyssCore {
     class Game {
@@ -24,6 +27,9 @@ namespace AbyssCore {
             // --- Hilo de Física/Mundo
             void worldLoop();
 
+            // Render Assets
+            std::unique_ptr<Shader> m_shader; // unique_ptr, para gestión automatica de memoria
+
             std::unique_ptr<Window> m_window;
 
             // Control de hilos
@@ -32,6 +38,10 @@ namespace AbyssCore {
 
             // Sync
             std::mutex m_stateMutex;
+
+            // State
+            float m_triangleX;  // Posición X Calculada en Logic
+            float m_triangleSpeed;// Velocidad
     };
 }
 #endif
