@@ -40,8 +40,8 @@ namespace AbyssCore {
             std::mutex m_stateMutex;
 
             // State
-            float m_triangleX;  // Posición X Calculada en Logic
-            float m_triangleSpeed;// Velocidad
+            float m_triangleX = 0.0f;  // Pfición X Calculada en Logic
+            float m_triangleSpeed = 0.1f;// Velocidad
     };
 }
 #endif

@@ -32,7 +32,7 @@ namespace AbyssCore{
             exit(-1);
         }
         glfwMakeContextCurrent(m_window);
-
+        glfwSwapInterval(1);
         if(!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)){
             std::cout << "[ERROR] [CRITICO] Fallo al inicializar GLAD " << std::endl;
             exit(-1);

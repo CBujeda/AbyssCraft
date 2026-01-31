@@ -23,6 +23,7 @@ set(SOURCES
     src/core/Window.cpp
     src/core/Game.cpp
     src/render/Tessellator.cpp
+    src/render/Shader.cpp
 )
 
 # ------------------------------------------------------------------
