@@ -16,7 +16,7 @@ namespace AbyssCore {
         private:
             unsigned int ID;
             void checkCompileErrors(unsigned int shader, const std::string type);
-        
+            void compile(std::string& vertexCode, std::string& fragmentCode);
             
     };
 
