@@ -12,9 +12,9 @@ namespace AbyssCore {
      * 
      */
     struct Vertex {
-        glm::vec3 position;
-        glm::vec4 color;
-        glm::vec2 texCoords;
+        glm::vec3 position; //(location 0)
+        glm::vec4 color;    //(location 1)
+        glm::vec2 texCoords; //(location 2)
     };
 
     /**
