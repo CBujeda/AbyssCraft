@@ -24,6 +24,7 @@ set(SOURCES
     src/core/Game.cpp
     src/render/Tessellator.cpp
     src/render/Shader.cpp
+    src/core/Camera.cpp
 )
 
 # ------------------------------------------------------------------
