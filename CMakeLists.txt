@@ -22,6 +22,7 @@ set(SOURCES
     src/glad.c  # La descarga para glad desde https://glad.dav1d.de/
     src/core/Window.cpp
     src/core/Game.cpp
+    src/render/Tessellator.cpp
 )
 
 # ------------------------------------------------------------------
