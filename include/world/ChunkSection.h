@@ -23,7 +23,7 @@ namespace AbyssCore {
             // Getters
             BlockID getBlock(int x, int y, int z) const;
             void setBlock(int x, int y, int z, BlockID block);
-
+            /**/
             // Estado
             bool isEmpty() const {}
             int getYIndex() const {}

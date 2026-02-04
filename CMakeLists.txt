@@ -25,7 +25,7 @@ set(SOURCES
     src/core/Camera.cpp
     src/render/Tessellator.cpp
     src/render/Shader.cpp
-    src/world/ChunkColumn.cpp
+
 )
 
 # ------------------------------------------------------------------
