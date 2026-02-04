@@ -60,7 +60,14 @@ namespace AbyssCore{
     }
 
 
-
+    /**
+     * @brief Recalcula los vectores directores de la cámara basándose en los ángulos de Euler.
+     * 
+     * Actualiza los vectores Front, Right y Up utilizando trigonometría a partir de los valores actuales de Yaw y Pitch.
+     * 
+     * @return void
+     * @note Esta función debe llamarse internamente cada vez que se modifique la rotación de la cámara para mantener la coherencia en el renderizado.
+     */
     void Camera::updateCameraVectors() {
         glm::vec3 front;
         front.x = cos(glm::radians(c_Yaw)) * cos(glm::radians(c_Pitch));
