@@ -20,11 +20,13 @@ find_package(OpenGL REQUIRED)
 set(SOURCES 
     src/main.cpp 
     src/glad.c  # La descarga para glad desde https://glad.dav1d.de/
+    src/stb_impl.cpp # Cargador de texturas
     src/core/Window.cpp
     src/core/Game.cpp
     src/core/Camera.cpp
     src/render/Tessellator.cpp
     src/render/Shader.cpp
+
 
 )
 
