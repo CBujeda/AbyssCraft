@@ -13,8 +13,11 @@ namespace AbyssCore {
     // En binario: 00001111, permite extraer los 4 bits menos significativos
     constexpr int CHUNK_SECTION_MASK = CHUNK_SECTION_SIZE - 1;
 
-    constexpr int CHUNK_SECTION_AREA = CHUNK_SECTION_SIZE * CHUNK_SECTION_SIZE;     // x*z
-    constexpr int CHUNK_SECTION_VOLUME =  CHUNK_SECTION_AREA * CHUNK_SECTION_SIZE; // A*h
+    constexpr int CHUNK_SECTION_LAYER = CHUNK_SECTION_SIZE * CHUNK_SECTION_SIZE;     // x*z
+    constexpr int CHUNK_SECTION_LAYER_LOG2 = 8;      // log2(16 * 16), para movernos una capa (Y)
+    
+    
+    constexpr int CHUNK_SECTION_VOLUME =  CHUNK_SECTION_LAYER * CHUNK_SECTION_LAYER; // A*h
 
     class ChunkSection{
         public:
